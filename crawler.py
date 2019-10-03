@@ -2,13 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 import bs4
 import re
+import os
 
 def crawl_quora_topics(topic):
-	file = open("output.txt","w", encoding='utf-8')
+	script_dir = os.getcwd()
+	rel_path = "saidas/"+topic+".txt"
+	abs_file_path = os.path.join(script_dir, rel_path)
+	file = open(abs_file_path,"a", encoding='utf-8')
 	print(topic)
 	topic='-'.join(topic.split(' '))
 	print(topic)
-	url='https://www.quora.com/topic/'+topic;
+	url='https://pt.quora.com/topic/'+topic;
 	source_code=requests.get(url)
 	plain_text=source_code.text
 	soup=BeautifulSoup(plain_text,'html.parser')
@@ -26,12 +30,12 @@ def crawl_quora_topics(topic):
 			file.write('\n')
 			print(question.span.get_text())
 			file.write(question.span.get_text())
-			url='https://www.quora.com'+question.get('href')
+			url=question.get('href')
 			print(url)
 			source_code=requests.get(url)
 			plain_text=source_code.text
 			ansSoup=BeautifulSoup(plain_text,'html.parser')
-			for answer in ansSoup.find_all('div',{'class':'ExpandedQText ExpandedAnswer'}):
+			for answer in ansSoup.find_all('div',{'class':'ui_qtext_expanded'}):
 				print('\n')
 				print('**************************ANSWER************************************')
 				file.write('\n')
