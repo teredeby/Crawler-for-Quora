@@ -1,0 +1,9 @@
+O que é x se [math] 3^x +5^x = 706[/math]?
+*A*
+x=4
+*A*
+4
+*A*
+4pode resolver com EXCEL usandodados -> Solver
+*A*
+4

@@ -5,12 +5,12 @@ import re
 import os
 
 def crawl_quora_topics(topic):
-	script_dir = os.getcwd()
-	rel_path = "saidas/"+topic+".txt"
-	abs_file_path = os.path.join(script_dir, rel_path)
-	file = open(abs_file_path,"a", encoding='utf-8')
-	print(topic)
 	topic='-'.join(topic.split(' '))
+	script_dir = os.getcwd()
+	rel_path = "saidas/"+topic+"/"
+	abs_file_path = os.path.join(script_dir, rel_path)
+	if not os.path.exists(abs_file_path):
+		os.mkdir(abs_file_path)
 	print(topic)
 	url='https://pt.quora.com/topic/'+topic;
 	source_code=requests.get(url)
@@ -18,16 +18,17 @@ def crawl_quora_topics(topic):
 	soup=BeautifulSoup(plain_text,'html.parser')
 	i=0
 	for question in soup.find_all('a',{'class':'question_link'}):
+		abs_file_path_complete = abs_file_path + str(i) + ".txt"
+		file = open(abs_file_path_complete,"a", encoding='utf-8')
 		a=''
 		print('\n')
-		file.write('\n')
+		
 		print('**************************NEW QUESTION************************************')
 		if(i<100):
 			i=i+1
 			print(i)
 			print('\n')
-			file.write(str(i))
-			file.write('\n')
+			
 			print(question.span.get_text())
 			file.write(question.span.get_text())
 			url=question.get('href')
@@ -39,14 +40,15 @@ def crawl_quora_topics(topic):
 				print('\n')
 				print('**************************ANSWER************************************')
 				file.write('\n')
-				file.write('**************************ANSWER************************************')
+				file.write('*A*')
 				file.write('\n')
 				#print(answer.prettify())
 				print(cleanhtml(answer.get_text()))
 				file.write(cleanhtml(answer.get_text()))
 		else:
 			break
-	file.close()
+		file.close()
+	
 
 def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>')

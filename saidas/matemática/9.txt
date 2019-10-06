@@ -1,0 +1,3 @@
+Por que consigo enumerar os numeros racionais, mas não consigo enumerar os reais?
+*A*
+Resposta bem curta e intuitiva. Todo racional pode ser escrito como o quociente de dois inteiros, sendo assim, posso contar todos os inteiros do dividendo e todos os inteiros do divisor. Logo, posso contar todos os quocientes possíveis.Os reais são formados por dízimas infinitas das quais não podemos determinar o último algarismo de alguns deles, como as raízes de dois, de três, de cinco e assim por diante, dos transcedentais. Em outras palavras, não podemos determinar quantos ficariam de fora na contagem, não podemos contar todos.
