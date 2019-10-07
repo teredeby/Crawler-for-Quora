@@ -7,7 +7,7 @@ import os
 def crawl_quora_topics(topic):
 	topic='-'.join(topic.split(' '))
 	script_dir = os.getcwd()
-	rel_path = "saidas/"+topic+".txt"
+	rel_path = "saidas/"+topic+".csv"
 	abs_file_path = os.path.join(script_dir, rel_path)
 	#if not os.path.exists(abs_file_path):
 	#	os.mkdir(abs_file_path)
@@ -18,7 +18,7 @@ def crawl_quora_topics(topic):
 	soup=BeautifulSoup(plain_text,'html.parser')
 	i=0
 	file = open(abs_file_path,"a", encoding='utf-8')
-	file.write('\"id\",\"question\", \"answers\"')
+	file.write('\"id\",\"question\",\"answers\"')
 	file.write('\n')
 	print(len(soup.find_all('a',{'class':'question_link'})))
 	#if(len(soup.find_all('a',{'class':'question_link'})) == 0)
